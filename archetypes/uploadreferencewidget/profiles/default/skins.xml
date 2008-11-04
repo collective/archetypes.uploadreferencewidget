@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+  <object name="uploadreferencewidget" 
+    meta_type="Filesystem Directory View"
+    directory="archetypes.uploadreferencewidget:skins/uploadreferencewidget"/>
+  <skin-path name="Plone Default">
+    <layer name="uploadreferencewidget" 
+      insert-after="custom" />
+  </skin-path>
+</object>

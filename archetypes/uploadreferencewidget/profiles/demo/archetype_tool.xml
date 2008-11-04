@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<archetypetool>
+  <catalogmap>
+    <type portal_type="UploadReferenceWidgetDemo">
+      <catalog value="portal_catalog" />
+    </type>
+  </catalogmap>
+</archetypetool>
+

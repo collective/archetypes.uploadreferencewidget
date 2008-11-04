@@ -1,0 +1,95 @@
+archetypes.uploadreferencewidget 0.1-alpha - Unreleased
+
+    - Eggified and changed to use archetypes.referencebrowserwidget instead of
+      Products.ATReferenceBrowserWidget
+      [swampmonkey]
+
+UploadReferenceWidget 1.2 - Unreleased
+
+    - (changes)
+
+
+UploadReferenceWidget 1.1 - Released November 26th, 2007
+
+    - Fixed a persistence bug in the TestCase who was causing tests to
+      behave in different ways depending on how they were run or on
+      the Plone version.
+      [deo]
+
+    - Fixed the usage of 'startup_directory' in the demo.py code.
+      [deo]
+
+    - Made sure the widget honors the "use the current object" as the
+      'startup_directory' when its value is "".
+      [deo]
+
+    - Fixed the "can't save the object" problem when the widget's field
+      is marked as required.
+      [deo]
+
+
+UploadReferenceWidget 1.0.1 - Released November 16th, 2007
+
+    - Reformulated the MonkeyPatch code to make it more robust and also
+      to patch the right *class*.
+      [deo]
+
+    - Amended a test to work on all Plone versions.
+      [deo]
+
+
+UploadReferenceWidget 1.0 - Released November 14th, 2007
+
+    - Fixed the text formatting of README.txt to use the StructuredText
+      markup.
+      [deo]
+
+    - Fixed to not upload files when the form validation fails.
+      [deo]
+
+    - Added a MonkeyPatch for Archetypes BaseObject._processForm method,
+      so we don't require the entire world to upgrade Archetypes to
+      unreleased versions.
+      [deo]
+
+
+UploadReferenceWidget 0.5 - Released October 30th, 2007
+
+    - Fixed to use the reference_edit macro from ATReferenceBrowserWidget
+      (present in 1.7.2 and 2.0.1 versions), when available. This removes
+      the double title/description field text.
+      [deo]
+
+    - Added a multi-upload feature. You can now upload more than one file
+      at a time when the widget support multiple values.
+      [deo]
+
+    - Fixed a bug where the directory path wasn't being removed from the
+      filename, when uploading from Internet Explorer to a Zope server
+      running in OS different from Windows.
+      [deo]
+
+    - Improved the 'startup_directory' handling: if the path doesn't
+      exists, the files are uploaded inside the instance itself (in case
+      of a folderish object), or its parent.
+      [deo]
+
+
+UploadReferenceWidget 0.2 - Released September 10th, 2007
+
+    - Improved the content of the README.txt file. Added info about tests
+      and example usage.
+      [deo]
+
+    - Renamed, simplified and added a second field, non multiValued, to our
+      demo schema.
+      [deo]
+
+    - Fixed the upload to also works when the field is not multiValued.
+      [deo]
+
+
+UploadReferenceWidget 0.1 - Released August 24th, 2007
+
+    - Initial version.
+      [deo]

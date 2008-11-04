@@ -1,0 +1,106 @@
+Upload Reference Widget Functional Tests
+========================================
+
+Before we can begin, we need to set up a few things.
+
+First we need a manager account:
+
+  >>> uf = self.portal.acl_users
+  >>> uf._doAddUser('manager', 'secret', ['Manager'], [])
+
+Then an Archetype object. In this case, a plain Document:
+
+  >>> from Products.CMFPlone.utils import _createObjectByType
+  >>> self.doc = _createObjectByType('Document', self.portal, id='doc')
+
+And finally, override the standard RerefenceWidget with our own:
+
+  >>> from archetypes.uploadreferencewidget.widget import UploadReferenceWidget
+  >>> self.field = self.doc.getField('relatedItems')
+  >>> self.field.multiValued = True
+  >>> self.field.widget = UploadReferenceWidget()
+
+Now let's upload a file to make sure it works:
+
+  >>> print http(r"""
+  ... POST /plone/doc/base_edit HTTP/1.1
+  ... Authorization: Basic manager:secret
+  ... Content-Type: multipart/form-data; boundary=separator
+  ...
+  ... --separator
+  ... Content-Disposition: form-data; name="form.submitted"
+  ...
+  ... 1
+  ... --separator
+  ... Content-Disposition: form-data; name="title"
+  ...
+  ... foo
+  ... --separator
+  ... Content-Disposition: form-data; name="relatedItems_option"
+  ...
+  ... upload
+  ... --separator
+  ... Content-Disposition: form-data; name="relatedItems_file:list"; filename="foo.txt"
+  ... Content-Type: text/plain
+  ...
+  ... foo bar baz
+  ... --separator--
+  ... """, handle_errors=False)
+  HTTP/1.1 302 Moved Temporarily
+  ...
+
+The new foo.txt file is now a related item:
+
+  >>> self.doc.getRelatedItems()
+  [<ATFile at /plone/foo.txt>]
+
+And it was uploaded to the portal root, containing what we expect:
+
+  >>> 'foo.txt' in self.portal.contentIds()
+  True
+
+  >>> print self.portal['foo.txt'].getFile()
+  foo bar baz
+
+As a last test, let's make sure the file isn't uploaded when the validation
+fails. Note that we're not passing a value to the 'title' field, which is
+required:
+
+  >>> print http(r"""
+  ... POST /plone/doc/base_edit HTTP/1.1
+  ... Authorization: Basic manager:secret
+  ... Content-Type: multipart/form-data; boundary=separator
+  ...
+  ... --separator
+  ... Content-Disposition: form-data; name="form.submitted"
+  ...
+  ... 1
+  ... --separator
+  ... Content-Disposition: form-data; name="title"
+  ...
+  ...
+  ... --separator
+  ... Content-Disposition: form-data; name="relatedItems_option"
+  ...
+  ... upload
+  ... --separator
+  ... Content-Disposition: form-data; name="relatedItems_file:list"; filename="bar.txt"
+  ... Content-Type: text/plain
+  ...
+  ... The validation will fail.
+  ... --separator--
+  ... """, handle_errors=False)
+  HTTP/1.1 200 OK
+  ...
+  ...Title is required, please correct...
+  ...
+
+The related items field continues with the previous value:
+
+  >>> self.doc.getRelatedItems()
+  [<ATFile at /plone/foo.txt>]
+
+And no additional File was created:
+
+  >>> 'bar.txt' in self.portal.contentIds()
+  False

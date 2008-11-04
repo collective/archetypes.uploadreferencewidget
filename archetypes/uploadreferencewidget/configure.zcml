@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+           xmlns:cmf="http://namespaces.zope.org/cmf"
+           xmlns:five="http://namespaces.zope.org/five">
+
+    <five:registerPackage package="." initialize=".initialize" />
+    <cmf:registerDirectory name="uploadreferencewidget" />
+
+    <genericsetup:registerProfile
+      name="default"
+      title="Upload Reference Widget"
+      directory="profiles/default"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure> 

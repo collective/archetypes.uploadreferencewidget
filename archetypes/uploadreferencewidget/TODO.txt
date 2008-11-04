@@ -1,0 +1,4 @@
+Nice to have features
+=====================
+
+[ ] Move the demo content-type to a dedicated GS profile

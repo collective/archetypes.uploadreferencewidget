@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="atreferencebrowserwidget">
+
+  <head><title></title></head>
+
+  <body>
+
+    <metal:view_macro define-macro="view">
+      <div metal:use-macro="here/referencebrowser/macros/view"></div>
+    </metal:view_macro>
+
+    <metal:edit_macro define-macro="edit">
+
+      <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+
+
+        <div metal:fill-slot="widget_body"
+             tal:define="multiVal python:test(field.multiValued, 1, 0);
+                         show_path          field/widget/show_path|nothing;
+                         image_portal_types widget/image_portal_types;
+                         image_method       widget/image_method|string:;
+                         portal_path        python: '/'.join(context.portal_url.getPortalObject().getPhysicalPath());
+                         fieldName fieldName;
+                         fieldRealName field/getName;
+                         uids python:same_type(value, []) and value or [value];
+                         types_param python:','.join(field.allowed_types)
+                         ">
+
+          <input class="noborder"
+                 type="radio"
+                 value="select"
+                 checked="checked"
+                 tal:attributes="tabindex tabindex/next;
+                                 name string:${fieldName}_option;
+                                 id string:${fieldName}_select;
+                                 onclick string:hideUploadReference('$fieldName')"/>
+
+          <label for=""
+                 tal:attributes="for string:${fieldName}_select"
+                 i18n:translate="label_reference_existing_content">
+                 Reference an existing content item
+          </label>
+          <br />
+          <input class="noborder"
+                 type="radio"
+                 value="upload"
+                 tal:attributes="tabindex tabindex/next;
+                                 name string:${fieldName}_option;
+                                 id string:${fieldName}_upload;
+                                 onclick string:showUploadReference('$fieldName')"/>
+          <label for=""
+                 tal:attributes="for string:${fieldName}_upload;"
+                 i18n:translate="label_upload_new_file">
+                 Upload a new file and reference it
+          </label>
+
+          <div id="box_select" tal:attributes="id string:box_${fieldName}_select"
+                               tal:define="rb_macros nocall:here/referencebrowser/macros"
+               style="margin-top: 0.5em">
+              <metal:select use-macro="rb_macros/reference_edit | rb_macros/edit" />
+          </div>
+
+          <div id="box_upload" tal:attributes="id string:box_${fieldName}_upload"
+               style="display: none; margin-top: 0.5em">
+              <div id="inputs" tal:attributes="id string:${fieldName}_inputs">
+                  <input type="file"
+                         size="30"
+                         tal:attributes="name string:${fieldName}_file:list;
+                                         id string:${fieldName}_file" />
+              </div>
+              <a href="javascript:void(0)"
+                 tal:condition="multiVal"
+                 tal:attributes="onclick string:return addUploadReferenceInput('$fieldName')"
+                 i18n:translate="label_upload_another_file">Upload another file</a>
+          </div>
+
+        </div>
+      </metal:use>
+    </metal:edit_macro>
+
+    <metal:search_macro define-macro="search">
+      <div metal:use-macro="here/widgets/reference/macros/edit"></div>
+    </metal:search_macro>
+  </body>
+</html>
