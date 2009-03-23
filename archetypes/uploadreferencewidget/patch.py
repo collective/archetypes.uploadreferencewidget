@@ -14,11 +14,13 @@
 # www.enfoldsystems.com
 # info@enfoldsystems.com
 #
-
 from inspect import getargs
+import logging
 from Products.Archetypes.utils import mapply
 from Products.Archetypes.Widget import TypesWidget
 from Products.Archetypes.BaseObject import BaseObject
+
+logger = logging.getLogger("archetypes.uploadreferencewidget")
 
 # If the process_form method has less than three default values,
 # then we need to patch it
@@ -106,4 +108,6 @@ def patched_processForm(self, data=1, metadata=None, REQUEST=None, values=None):
     self.reindexObject()
 
 if PATCH_PROCESS_FORM:
+    msg = "PATCHING BaseObject._processForm; non-trivial patch being applied"
+    logger.info(msg)
     BaseObject._processForm = patched_processForm
