@@ -1,4 +1,14 @@
 Nice to have features
 =====================
+[ ] When you reference an existing file.  Then switch to 
+    upload a referenced file.  The widget hides the previous
+    (existing) reference you made.  Even while uploading 
+    multiple files; you should be able to see the existing 
+    references you selected.  The system works as expected
+    unfortunately the UI does not.
+
+[ ] Explain in detail why the monkeypatch is being applied.
+    Need more docs under patch.py; specifically what version
+    of AT is required to make patch obsolete.
 
 [ ] Move the demo content-type to a dedicated GS profile
