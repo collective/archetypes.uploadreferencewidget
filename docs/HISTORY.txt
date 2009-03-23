@@ -1,8 +1,17 @@
 Changelog
 =========
 
-0.1-alpha - Unreleased
+0.2 - 2009-03-22
 ----------------
 
-* Initial release
+* Added our skin layer to all skins paths.
+  [deo]
 
+* Fixed dependency registration on both metadata.xml and configure.zcml.
+  [deo]
+
+
+0.1-alpha - Unreleased
+----------------------
+
+* Initial release

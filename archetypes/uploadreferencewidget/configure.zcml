@@ -3,10 +3,11 @@
            xmlns:cmf="http://namespaces.zope.org/cmf"
            xmlns:five="http://namespaces.zope.org/five">
 
-    <five:registerPackage package="." initialize=".initialize" />
-    <cmf:registerDirectory name="uploadreferencewidget" />
+  <five:registerPackage package="." initialize=".initialize" />
+  <cmf:registerDirectory name="uploadreferencewidget" />
+  <include package="archetypes.referencebrowserwidget" />
 
-    <genericsetup:registerProfile
+  <genericsetup:registerProfile
       name="default"
       title="Upload Reference Widget"
       directory="profiles/default"
@@ -14,4 +15,4 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-</configure> 
+</configure>
