@@ -1,5 +1,8 @@
 archetypes.uploadreferencewidget 0.1-alpha - Unreleased
 
+    - log that fact that a monkey patch is being applied.
+      [runyaga]
+      
     - Eggified and changed to use archetypes.referencebrowserwidget instead of
       Products.ATReferenceBrowserWidget
       [swampmonkey]
