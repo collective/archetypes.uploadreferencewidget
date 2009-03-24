@@ -7,8 +7,20 @@ Nice to have features
     references you selected.  The system works as expected
     unfortunately the UI does not.
 
+    BUG: 
+    - Looks like the behavior is different between items you
+      select whie "Reference an existing content item" and
+      "Upload a new file and reference it"
+    
 [ ] Explain in detail why the monkeypatch is being applied.
     Need more docs under patch.py; specifically what version
     of AT is required to make patch obsolete.
 
+[ ] Do not require someone to click link "upload another file".
+    Automatically present another file widget.  After they have
+    selected a file.  If they do not upload a second file that is fine.
+
+[ ] While displaying links to file's; show them as hyperlinks.  So
+    someone can click on the link and goto the view of that content type.
+    
 [ ] Move the demo content-type to a dedicated GS profile
