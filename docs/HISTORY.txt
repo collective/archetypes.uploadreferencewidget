@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.2.1 - Unreleased
+------------------
+
+* Add locales[toutpt]
+* Add french translation [toutpt]
+
 0.2 - 2009-03-22
 ----------------
 

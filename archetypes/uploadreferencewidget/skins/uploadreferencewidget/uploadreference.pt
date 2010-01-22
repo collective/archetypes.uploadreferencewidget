@@ -38,7 +38,7 @@
                                  id string:${fieldName}_select;
                                  onclick string:hideUploadReference('$fieldName')"/>
 
-          <label for=""
+          <label for="" i18n:domain="archetypes.uploadreferencewidget"
                  tal:attributes="for string:${fieldName}_select"
                  i18n:translate="label_reference_existing_content">
                  Reference an existing content item
@@ -51,7 +51,7 @@
                                  name string:${fieldName}_option;
                                  id string:${fieldName}_upload;
                                  onclick string:showUploadReference('$fieldName')"/>
-          <label for=""
+          <label for="" i18n:domain="archetypes.uploadreferencewidget"
                  tal:attributes="for string:${fieldName}_upload;"
                  i18n:translate="label_upload_new_file">
                  Upload a new file and reference it
