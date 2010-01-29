@@ -21,6 +21,7 @@ from Products.Archetypes.public import BaseSchema
 from Products.Archetypes.public import BaseContent
 from Products.Archetypes.public import ReferenceField
 from archetypes.uploadreferencewidget.widget import UploadReferenceWidget
+from archetypes.uploadreferencewidget import config
 
 URWSchema = BaseSchema.copy() + Schema((
 
@@ -74,4 +75,4 @@ class UploadReferenceWidgetDemo(BaseContent):
     schema = URWSchema
 
 
-registerType(UploadReferenceWidgetDemo)
+registerType(UploadReferenceWidgetDemo, config.PROJECTNAME)
