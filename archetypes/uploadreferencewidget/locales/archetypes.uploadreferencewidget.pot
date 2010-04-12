@@ -15,7 +15,8 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: atreferencebrowserwidget\n"
+"Domain: archetypes.uploadreferencewidget\n"
+
 
 msgid "label_reference_existing_content"
 msgstr ""
