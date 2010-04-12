@@ -4,6 +4,8 @@ Changelog
 0.2.1 (Unreleased)
 ------------------
 
+- Add MANIFEST.in-file [WouterVH]
+
 - Fix i18n-domain in pot-file [WouterVH]
 
 - Add Dutch translation [WouterVH]
@@ -23,7 +25,12 @@ Changelog
 - Fixed dependency registration on both metadata.xml and configure.zcml. [deo]
 
 
-0.1-alpha - Unreleased
-----------------------
+0.1-alpha (Unreleased)
+---------------------
 
-- Initial release
+- log that fact that a monkey patch is being applied. [runyaga]
+
+- Eggified to archetypes.uploadreferencewidget and changed to use
+  archetypes.referencebrowserwidget instead of Products.ATReferenceBrowserWidget
+  [swampmonkey]
+
