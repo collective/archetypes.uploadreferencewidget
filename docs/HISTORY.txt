@@ -1,24 +1,29 @@
 Changelog
 =========
 
-0.2.1 - Unreleased
+0.2.1 (Unreleased)
 ------------------
 
-* Add locales[toutpt]
-* Add french translation [toutpt]
-* Fix registerType. It needs a package name since Archetypes 1.3.2 [toutpt]
+- Fix i18n-domain in pot-file [WouterVH]
 
-0.2 - 2009-03-22
+- Add Dutch translation [WouterVH]
+
+- Add locales [toutpt]
+
+- Add french translation [toutpt]
+
+- Fix registerType. It needs a package name since Archetypes 1.3.2 [toutpt]
+
+
+0.2 (2009-03-22)
 ----------------
 
-* Added our skin layer to all skins paths.
-  [deo]
+- Added our skin layer to all skins paths. [deo]
 
-* Fixed dependency registration on both metadata.xml and configure.zcml.
-  [deo]
+- Fixed dependency registration on both metadata.xml and configure.zcml. [deo]
 
 
 0.1-alpha - Unreleased
 ----------------------
 
-* Initial release
+- Initial release
