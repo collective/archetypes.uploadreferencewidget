@@ -21,4 +21,3 @@ GLOBALS = globals()
 SKINS_DIR = 'skins'
 PROJECTNAME = 'uploadreferencewidget'
 PRODUCT_DIR = package_home(GLOBALS)
-

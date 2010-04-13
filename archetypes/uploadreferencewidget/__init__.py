@@ -29,6 +29,7 @@ from archetypes.uploadreferencewidget import demo
 # versions are released
 import patch
 
+
 def initialize(context):
 
     content_types, constructors, ftis = process_types(
