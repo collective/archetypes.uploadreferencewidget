@@ -33,8 +33,7 @@
                  type="radio"
                  value="select"
                  checked="checked"
-                 tal:attributes="tabindex tabindex/next;
-                                 name string:${fieldName}_option;
+                 tal:attributes="name string:${fieldName}_option;
                                  id string:${fieldName}_select;
                                  onclick string:hideUploadReference('$fieldName')"/>
 
@@ -47,8 +46,7 @@
           <input class="noborder"
                  type="radio"
                  value="upload"
-                 tal:attributes="tabindex tabindex/next;
-                                 name string:${fieldName}_option;
+                 tal:attributes="name string:${fieldName}_option;
                                  id string:${fieldName}_upload;
                                  onclick string:showUploadReference('$fieldName')"/>
           <label for="" i18n:domain="archetypes.uploadreferencewidget"
