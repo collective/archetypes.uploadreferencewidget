@@ -78,7 +78,7 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
 
             # Define the destination folder
             root = instance
-            foldername = self.startup_directory
+            foldername = self.getStartupDirectory(instance, field)
             if foldername.startswith('/'):
                 root = portal
                 foldername = foldername[1:]
