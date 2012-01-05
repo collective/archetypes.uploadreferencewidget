@@ -1,6 +1,10 @@
 Changelog
 =========
 
+- Changed startup directory handling - reuse getStartupDirectory 
+  method from ReferenceBrowserWidget
+  [naro]
+
 0.2.1 (2010-09-22)
 ------------------
 
