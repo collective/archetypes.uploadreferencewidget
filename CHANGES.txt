@@ -1,6 +1,18 @@
 Changelog
 =========
 
+- Fix mimetype of brain by reindexing object after creation
+  [pbauer]
+
+- Use mimetypes to guess mimetype
+  [pbauer] 
+
+- Add German translation.
+  [pbauer]
+
+- Fix i18n-domain for "Upload another file". 
+  [pbauer]
+
 - Changed startup directory handling - reuse getStartupDirectory 
   method from ReferenceBrowserWidget
   [naro]

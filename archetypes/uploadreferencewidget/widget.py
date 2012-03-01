@@ -15,6 +15,7 @@
 # info@enfoldsystems.com
 #
 
+import mimetypes
 from Acquisition import aq_parent
 from OFS.interfaces import IFolder
 from AccessControl import ClassSecurityInfo
@@ -100,7 +101,7 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                 if filename:
                     # Guess the mimetype & define the content-type class
                     content = 'File'
-                    mimetype = str(mt_tool.classify(fileobj.read(1024)))
+                    mimetype = mimetypes.guess_type(filename)[0] or ""
                     if mimetype.startswith('image'):
                         content = 'Image'
 
@@ -111,6 +112,7 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                     obj._renameAfterCreation()
                     obj.unmarkCreationFlag()
                     obj.update_data(fileobj, mimetype)
+                    obj.reindexObject()
 
                     result.append(obj.UID())
 
