@@ -72,6 +72,7 @@
               <a href="javascript:void(0)"
                  tal:condition="multiVal"
                  tal:attributes="onclick string:return addUploadReferenceInput('$fieldName')"
+                 i18n:domain="archetypes.uploadreferencewidget"
                  i18n:translate="label_upload_another_file">Upload another file</a>
           </div>
 

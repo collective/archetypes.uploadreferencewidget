@@ -23,3 +23,6 @@ msgstr ""
 
 msgid "label_upload_new_file"
 msgstr ""
+
+msgid "label_upload_another_file"
+msgstr ""
