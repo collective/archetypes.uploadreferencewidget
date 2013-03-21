@@ -29,7 +29,7 @@ from Products.Archetypes.Registry import registerWidget
 from Products.Archetypes.Registry import registerPropertyType
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
-from plone.uuid.interfaces import IUUID 
+from plone.namedfile import NamedBlobImage, NamedBlobFile
 
 import pkg_resources
 try:
@@ -39,8 +39,15 @@ except pkg_resources.DistributionNotFound:
     pass
 else:
     HAS_DEXTERITY = True
-    from plone.dexterity.interfaces import IDexterityContent 
     from plone.i18n.normalizer.interfaces import IURLNormalizer
+    from plone.dexterity.utils import createContent, addContentToContainer
+
+try:
+    from plone.uuid.interfaces import IUUID
+    HAS_UUID = True
+except ImportError:
+    HAS_UUID = False
+
 
 class UploadReferenceWidget(ReferenceBrowserWidget):
 
@@ -121,17 +128,11 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                         content = 'Image'
 
                     # Create the new content
-                    #import pdb; pdb.set_trace()
                     if HAS_DEXTERITY:
-                        from plone.dexterity.utils import createContent, addContentToContainer
-                        from plone.namedfile import NamedBlobImage, NamedBlobFile
-                        from plone.i18n.normalizer.interfaces import IURLNormalizer
                         util = queryUtility(IURLNormalizer)
                         obj_id = util.normalize(filename)
                         filename = filename.decode('utf-8')
-                        obj = createContent(content, id=obj_id,
-                                                     title=filename,
-                                            )
+                        obj = createContent(content, id=obj_id, title=filename)
                         obj = addContentToContainer(folder, obj)
                         fileobj.seek(0)
                         data = fileobj.read()
@@ -140,7 +141,10 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                         if headers:
                             contentType = headers.get('Content-Type', contentType)
                         obj.filename = filename
-                        obj.file = NamedBlobFile(data, contentType=contentType, filename=filename)
+                        if content == 'File':
+                            obj.file = NamedBlobFile(data, contentType=contentType, filename=filename)
+                        else:
+                            obj.image = NamedBlobImage(data, contentType=contentType, filename=filename)
                     else:
                         # Create Content with Archtypes
                         old_id = folder.generateUniqueId(content)
@@ -150,8 +154,11 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                         obj.unmarkCreationFlag()
                         obj.update_data(fileobj, mimetype)
                     obj.reindexObject()
-                    
-                    result.append(IUUID(obj, None))
+
+                    if HAS_UUID:
+                        result.append(IUUID(obj, None))
+                    else:
+                        result.append(obj.UID())
 
             if field.multiValued:
                 # Multi valued, append the old value
