@@ -38,7 +38,7 @@ except pkg_resources.DistributionNotFound:
     pass
 else:
     HAS_DEXTERITY = True
-    from plone.i18n.normalizer.interfaces import IURLNormalizer
+    from plone.dexterity.interfaces import IDexterityFTI
     from plone.dexterity.utils import createContent, addContentToContainer
 
     if HAVE_BLOBS:
@@ -47,12 +47,6 @@ else:
     else:
         from plone.namedfile import NamedImage as Image
         from plone.namedfile import NamedFile as File
-
-try:
-    from plone.uuid.interfaces import IUUID
-    HAS_UUID = True
-except ImportError:
-    HAS_UUID = False
 
 
 class UploadReferenceWidget(ReferenceBrowserWidget):
@@ -132,13 +126,12 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                     if mimetype.startswith('image'):
                         content = 'Image'
 
-                    # if HAS_DEXTERITY and FTI_von content = IDexteritykram:
+                    ttol = getToolByName(instance, "portal_types")
+                    fti = ttol.get(content)
                     # Create the new content
-                    if HAS_DEXTERITY:
-                        util = queryUtility(IURLNormalizer)
-                        obj_id = util.normalize(filename)
+                    if HAS_DEXTERITY and IDexterityFTI.providedBy(fti):
                         filename = filename.decode('utf-8')
-                        obj = createContent(content, id=obj_id, title=filename)
+                        obj = createContent(content, id=filename, title=filename)
                         obj = addContentToContainer(folder, obj)
                         fileobj.seek(0)
                         data = fileobj.read()
@@ -161,10 +154,7 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                         obj.update_data(fileobj, mimetype)
                     obj.reindexObject()
 
-                    if HAS_UUID:
-                        result.append(IUUID(obj, None))
-                    else:
-                        result.append(obj.UID())
+                    result.append(obj.UID())
 
             if field.multiValued:
                 # Multi valued, append the old value
