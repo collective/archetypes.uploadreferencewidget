@@ -15,23 +15,22 @@
 # info@enfoldsystems.com
 #
 
-from StringIO import StringIO
-
 import mimetypes
 from Acquisition import aq_parent
 from OFS.interfaces import IFolder
 from AccessControl import ClassSecurityInfo
 from zope.component import queryUtility
-from ZPublisher.HTTPRequest import FileUpload
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import _createObjectByType
 from Products.Archetypes.Registry import registerWidget
-from Products.Archetypes.Registry import registerPropertyType
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
-from plone.namedfile import NamedBlobImage, NamedBlobFile
-
 import pkg_resources
+try:
+    from z3c.blobfile.interfaces import IBlobFile, IBlobImage
+    HAVE_BLOBS = True
+except ImportError:
+    HAVE_BLOBS = False
+
 try:
     pkg_resources.get_distribution('plone.dexterity')
 except pkg_resources.DistributionNotFound:
@@ -41,6 +40,13 @@ else:
     HAS_DEXTERITY = True
     from plone.i18n.normalizer.interfaces import IURLNormalizer
     from plone.dexterity.utils import createContent, addContentToContainer
+
+    if HAVE_BLOBS:
+        from plone.namedfile import NamedBlobImage as Image
+        from plone.namedfile import NamedBlobFile as File
+    else:
+        from plone.namedfile import NamedImage as Image
+        from plone.namedfile import NamedFile as File
 
 try:
     from plone.uuid.interfaces import IUUID
@@ -97,7 +103,6 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
             result = []
             files_list = form.get('%s_file' % field.getName(), [])
             portal = getToolByName(instance, 'portal_url').getPortalObject()
-            mt_tool = getToolByName(portal, 'mimetypes_registry')
 
             # Define the destination folder
             root = instance
@@ -127,6 +132,7 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                     if mimetype.startswith('image'):
                         content = 'Image'
 
+                    # if HAS_DEXTERITY and FTI_von content = IDexteritykram:
                     # Create the new content
                     if HAS_DEXTERITY:
                         util = queryUtility(IURLNormalizer)
@@ -142,9 +148,9 @@ class UploadReferenceWidget(ReferenceBrowserWidget):
                             contentType = headers.get('Content-Type', contentType)
                         obj.filename = filename
                         if content == 'File':
-                            obj.file = NamedBlobFile(data, contentType=contentType, filename=filename)
+                            obj.file = File(data, contentType=contentType, filename=filename)
                         else:
-                            obj.image = NamedBlobImage(data, contentType=contentType, filename=filename)
+                            obj.image = Image(data, contentType=contentType, filename=filename)
                     else:
                         # Create Content with Archtypes
                         old_id = folder.generateUniqueId(content)

@@ -38,6 +38,7 @@ setup(name='archetypes.uploadreferencewidget',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'archetypes.referencebrowserwidget'
+          'archetypes.referencebrowserwidget',
+          'plone.namedfile'
       ],
       )
