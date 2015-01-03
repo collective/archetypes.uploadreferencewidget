@@ -1,10 +1,17 @@
 Changelog
 =========
 
-- Fix mimetype of brain by reindexing object after creation
+0.x.x (unreleased)
+------------------
+
+- Added ``z3c.autoinclude``-entrypoint to mark this as a Plone-plugin.
+  This avoids the need to explicitly load the zcml-slug.
+  [WouterVH]
+
+- Fix mimetype of brain by reindexing object after creation.
   [pbauer]
 
-- Use mimetypes to guess mimetype
+- Use mimetypes to guess mimetype.
   [pbauer] 
 
 - Add German translation.
@@ -14,8 +21,9 @@ Changelog
   [pbauer]
 
 - Changed startup directory handling - reuse getStartupDirectory 
-  method from ReferenceBrowserWidget
+  method from ReferenceBrowserWidget.
   [naro]
+
 
 0.2.1 (2010-09-22)
 ------------------

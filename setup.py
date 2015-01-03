@@ -23,10 +23,10 @@ setup(name='archetypes.uploadreferencewidget',
       long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
+          "Framework :: Plone",
+          "Programming Language :: Python",
+          "Topic :: Software Development :: Libraries :: Python Modules",
+          ],
       keywords='Relation Widget',
       author='Dorneles Tremea',
       author_email='dorneles@tremea.com',
@@ -39,5 +39,9 @@ setup(name='archetypes.uploadreferencewidget',
       install_requires=[
           'setuptools',
           'archetypes.referencebrowserwidget'
-      ],
+          ],
+      entry_points={
+          # -*- Entry points: -*-
+          'z3c.autoinclude.plugin': 'target = plone',
+          },
       )
