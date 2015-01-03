@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.x.x (unreleased)
-------------------
+0.3 (unreleased)
+----------------
 
 - Added ``z3c.autoinclude``-entrypoint to mark this as a Plone-plugin.
   This avoids the need to explicitly load the zcml-slug.

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.2.1'
+version = '0.3'
 
 
 long_description = (
@@ -30,7 +30,7 @@ setup(name='archetypes.uploadreferencewidget',
       keywords='Relation Widget',
       author='Dorneles Tremea',
       author_email='dorneles@tremea.com',
-      url='http://svn.plone.org/svn/archetypes/MoreFieldsAndWidgets/archetypes.uploadreferencewidget',
+      url='https://github.com/collective/archetypes.uploadreferencewidget',
       license='LGPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['archetypes'],
